@@ -1,6 +1,6 @@
-const userId = prompt("Enter your nickname"); // Prompt the user for their user ID
+const userId = prompt("Enter your nickname");
 
-const ws = new WebSocket(`ws://0.0.0.0:8000/ws/${userId}`);
+const ws = new WebSocket(`ws://localhost:8000/ws/${userId}`);
 
 ws.onmessage = function (event) {
     const outputDiv = document.getElementById("output");

@@ -1,6 +1,16 @@
 from fastapi import FastAPI, WebSocket
 
+from fastapi.staticfiles import StaticFiles
+from fastapi.templating import Jinja2Templates
+from fastapi.requests import Request
+
 app = FastAPI()
+
+# Montar la carpeta static
+app.mount("/static", StaticFiles(directory="static"), name="static")
+
+# Configurar Jinja2Templates
+templates = Jinja2Templates(directory="templates")
 from typing import List
 
 from fastapi import FastAPI, WebSocket, WebSocketDisconnect
@@ -17,6 +27,10 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+@app.get("/")
+async def read_root(request: Request):
+    return templates.TemplateResponse("index.html", {"request": request, "title": "Home Page"})
 
 
 @app.websocket("/ws/{user_id}")
