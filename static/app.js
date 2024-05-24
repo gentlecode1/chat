@@ -1,6 +1,6 @@
 const userId = prompt("Enter your nickname");
 
-const ws = new WebSocket(`ws://localhost:8000/ws/${userId}`);
+const ws = new WebSocket(`ws://mynewaprilchat.com/ws/${userId}`);
 
 ws.onmessage = function (event) {
     const outputDiv = document.getElementById("output");
