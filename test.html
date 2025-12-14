@@ -2,6 +2,7 @@
 <html>
 
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chat App</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Fredoka+One:wght@400&family=Quicksand:wght@300;400;600&display=swap');
@@ -156,6 +157,104 @@
 
         #messages::-webkit-scrollbar-thumb:hover {
             background: #a8a8a8;
+        }
+
+        /* Responsive para móvil */
+        @media (max-width: 768px) {
+            html, body {
+                height: 100%;
+                margin: 0;
+                padding: 0;
+                overflow: hidden;
+            }
+
+            .chat-container {
+                max-width: 100%;
+                border-radius: 0;
+                height: 100vh;
+                display: flex;
+                flex-direction: column;
+                margin: 0;
+            }
+
+            .chat-header {
+                padding: 15px;
+            }
+
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            .username-section {
+                padding: 15px;
+            }
+
+            #username {
+                width: 100%;
+                max-width: 250px;
+            }
+
+            #messages {
+                flex: 1;
+                height: 0; /* Importante para flexbox */
+                min-height: 0; /* Permite que se contraiga */
+                padding: 15px;
+            }
+
+            .message {
+                max-width: 85%;
+                font-size: 14px;
+            }
+
+            .system-message {
+                max-width: 90%;
+                font-size: 13px;
+            }
+
+            .input-container {
+                padding: 15px;
+                gap: 10px;
+            }
+
+            input, button {
+                font-size: 16px; /* Evita zoom en iOS */
+            }
+
+            button {
+                padding: 12px 20px;
+                white-space: nowrap;
+            }
+        }
+
+        /* Para pantallas muy pequeñas */
+        @media (max-width: 480px) {
+            html, body {
+                height: 100%;
+                margin: 0;
+                padding: 0;
+                overflow: hidden;
+            }
+
+            .chat-container {
+                border-radius: 0;
+                margin: 0;
+                height: 100vh;
+                display: flex;
+                flex-direction: column;
+            }
+
+            .message {
+                max-width: 90%;
+                font-size: 14px;
+            }
+
+            .input-container {
+                flex-wrap: nowrap;
+            }
+
+            #username {
+                width: 100%;
+            }
         }
     </style>
 </head>
