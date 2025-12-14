@@ -29,12 +29,23 @@
         const ws = new WebSocket(`${protocol}//${location.host}/ws`);
         const messages = document.getElementById('messages');
         
+        function getColorForUser(username) {
+            let hash = 0;
+            for (let i = 0; i < username.length; i++) {
+                hash = username.charCodeAt(i) + ((hash << 5) - hash);
+            }
+            
+            const hue = Math.abs(hash % 360);
+            return `hsl(${hue}, 65%, 45%)`;
+        }
+        
         ws.onmessage = function(event) {
             const data = JSON.parse(event.data);
             const div = document.createElement('div');
             
             if (data.type === 'message') {
-                div.innerHTML = `<strong>${data.user}:</strong> ${data.message} <small>(${new Date(data.timestamp).toLocaleTimeString()})</small>`;
+                const userColor = getColorForUser(data.user);
+                div.innerHTML = `<strong style="color: ${userColor};">${data.user}:</strong> ${data.message} <small>(${new Date(data.timestamp).toLocaleTimeString()})</small>`;
             } else {
                 div.innerHTML = `<em>${data.message} (${new Date(data.timestamp).toLocaleTimeString()})</em>`;
                 div.style.color = 'gray';
