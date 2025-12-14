@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
     <title>Chat App</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Fredoka+One:wght@400&family=Quicksand:wght@300;400;600&display=swap');
@@ -166,12 +166,15 @@
                 margin: 0;
                 padding: 0;
                 overflow: hidden;
+                position: fixed;
+                width: 100%;
             }
 
             .chat-container {
                 max-width: 100%;
                 border-radius: 0;
                 height: 100vh;
+                height: 100dvh; /* Dynamic viewport height para iOS */
                 display: flex;
                 flex-direction: column;
                 margin: 0;
@@ -214,6 +217,10 @@
             .input-container {
                 padding: 15px;
                 gap: 10px;
+                flex-shrink: 0; /* No se puede comprimir */
+                position: relative;
+                background: #f8f9fa;
+                z-index: 10;
             }
 
             input, button {
@@ -233,12 +240,15 @@
                 margin: 0;
                 padding: 0;
                 overflow: hidden;
+                position: fixed;
+                width: 100%;
             }
 
             .chat-container {
                 border-radius: 0;
                 margin: 0;
                 height: 100vh;
+                height: 100dvh; /* Dynamic viewport height para iOS */
                 display: flex;
                 flex-direction: column;
             }
