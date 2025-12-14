@@ -30,13 +30,28 @@
         const messages = document.getElementById('messages');
         
         function getColorForUser(username) {
+            const pleasantColors = [
+                '#e74c3c', // rojo suave
+                '#3498db', // azul
+                '#2ecc71', // verde
+                '#f39c12', // naranja
+                '#9b59b6', // púrpura
+                '#1abc9c', // turquesa
+                '#e67e22', // naranja oscuro
+                '#34495e', // azul grisáceo
+                '#16a085', // verde azulado
+                '#8e44ad', // violeta
+                '#d35400', // naranja quemado
+                '#27ae60', // verde esmeralda
+            ];
+            
             let hash = 0;
             for (let i = 0; i < username.length; i++) {
                 hash = username.charCodeAt(i) + ((hash << 5) - hash);
             }
             
-            const hue = Math.abs(hash % 360);
-            return `hsl(${hue}, 65%, 45%)`;
+            const colorIndex = Math.abs(hash % pleasantColors.length);
+            return pleasantColors[colorIndex];
         }
         
         ws.onmessage = function(event) {
