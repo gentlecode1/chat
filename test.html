@@ -30,28 +30,19 @@
         const messages = document.getElementById('messages');
         
         function getColorForUser(username) {
-            const pleasantColors = [
-                '#e74c3c', // rojo suave
-                '#3498db', // azul
-                '#2ecc71', // verde
-                '#f39c12', // naranja
-                '#9b59b6', // púrpura
-                '#1abc9c', // turquesa
-                '#e67e22', // naranja oscuro
-                '#34495e', // azul grisáceo
-                '#16a085', // verde azulado
-                '#8e44ad', // violeta
-                '#d35400', // naranja quemado
-                '#27ae60', // verde esmeralda
-            ];
-            
             let hash = 0;
             for (let i = 0; i < username.length; i++) {
-                hash = username.charCodeAt(i) + ((hash << 5) - hash);
+                const char = username.charCodeAt(i);
+                hash = ((hash << 5) - hash) + char;
+                hash = hash & hash; // Convert to 32bit integer
             }
             
-            const colorIndex = Math.abs(hash % pleasantColors.length);
-            return pleasantColors[colorIndex];
+            // Ensure positive number and better distribution
+            const hue = Math.abs(hash * 137.508) % 360;
+            const saturation = 50; // saturación suave para pasteles
+            const lightness = 65;  // claridad alta para efecto pastel
+            
+            return `hsl(${Math.floor(hue)}, ${saturation}%, ${lightness}%)`;
         }
         
         ws.onmessage = function(event) {
